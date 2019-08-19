@@ -2,5 +2,14 @@
   "name": "Rastreador",
   "version": "0.0.1",
   "description": "Consulte a situação de seus objetos nos Correios.",
-  "manifest_version": 2
+  "manifest_version": 2,
+  "page_action": {
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "src/images/get_started16.png",
+      "32": "src/images/get_started32.png",
+      "48": "src/images/get_started48.png",
+      "128": "src/images/get_started128.png"
+    }
+  }
 }
