@@ -11,5 +11,14 @@
       "48": "src/images/get_started48.png",
       "128": "src/images/get_started128.png"
     }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Abrir o Rastreador"
+    }
   }
 }
