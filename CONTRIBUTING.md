@@ -8,7 +8,7 @@
 
 Para abrir um pull-request, primeiramente crie um fork do projeto para a sua conta, então clone o projeto em sua maquina:
 
-`git clone git@github.com:seu-usuario/cep-promise.git`
+`git clone git@github.com:seu-usuario/rastreador.git`
 
 Agora pronto, você já pode começar a contribuir com o projeto!
 
