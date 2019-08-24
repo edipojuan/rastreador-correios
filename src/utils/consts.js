@@ -1,1 +1,1 @@
-export const PROXY_URL = 'https://proxier.now.sh/';
+export const PROXY_URL = 'https://proxier.now.sh';
