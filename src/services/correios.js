@@ -1,10 +1,10 @@
 'use strict';
 
-export default function fetchCorreiosService(CodigoDePostagem, proxyURL = '') {
+export default function fetchCorreiosService(codigoDePostagem, proxyURL = '') {
   const url = `${proxyURL}/http://webservice.correios.com.br:80/service/rastro`;
   const options = {
     method: 'POST',
-    body: `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://resource.webservice.correios.com.br/"><soapenv:Header/><soapenv:Body><res:buscaEventosLista><usuario>ECT</usuario><senha>SRO</senha><tipo>L</tipo><resultado>T</resultado><lingua>101</lingua><objetos>${CodigoDePostagem}</objetos></res:buscaEventosLista></soapenv:Body></soapenv:Envelope>`,
+    body: `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://resource.webservice.correios.com.br/"><soapenv:Header/><soapenv:Body><res:buscaEventosLista><usuario>ECT</usuario><senha>SRO</senha><tipo>L</tipo><resultado>T</resultado><lingua>101</lingua><objetos>${codigoDePostagem}</objetos></res:buscaEventosLista></soapenv:Body></soapenv:Envelope>`,
     headers: {
       'Content-Type': 'text/xml;charset=UTF-8',
       'cache-control': 'no-cache'
