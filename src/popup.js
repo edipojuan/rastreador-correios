@@ -11,16 +11,18 @@ function load() {
     var promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then(response => {
-      alert(Object.keys(response).forEach((k, i) => alert(i + ' - ' + k + ' => ' + response[k])))
+      const keys = Object.keys(response);
+
+      // keys.forEach((k, i) => alert(i + ' - ' + k + ' => ' + response[k]))
     })
   });
 }
 
 function fetchCorreiosService(codigoDePostagem) {
-  const url = `${PROXY_URL}/http://webservice.correios.com.br/service/rastro`;
+  const url = `${PROXY_URL}/https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente`;
   const options = {
     method: 'POST',
-    body: `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://resource.webservice.correios.com.br/"><soapenv:Header/><soapenv:Body><res:buscaEventosLista><usuario>ECT</usuario><senha>SRO</senha><tipo>L</tipo><resultado>T</resultado><lingua>101</lingua><objetos>${codigoDePostagem}</objetos></res:buscaEventosLista></soapenv:Body></soapenv:Envelope>`,
+    body: `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <cli:consultaSRO>\n         <listaObjetos>${codigoDePostagem}</listaObjetos>\n         <tipoConsulta>L</tipoConsulta>\n         <tipoResultado>T</tipoResultado>\n         <usuarioSro>ECT</usuarioSro>\n         <senhaSro>SRO</senhaSro>\n      </cli:consultaSRO>\n   </soapenv:Body>\n</soapenv:Envelope>`,
     headers: {
       'Content-Type': 'text/xml;charset=UTF-8',
       'cache-control': 'no-cache'
@@ -51,6 +53,7 @@ function parseSuccessXML(xmlString) {
     const returnStatement =
       xmlString.replace(/\r?\n|\r/g, '').match(/<return>(.*)<\/return>/)[0] ||
       '';
+    alert(returnStatement)
 
     const cleanReturnStatement = returnStatement
       .replace('<return>', '')
@@ -77,6 +80,7 @@ function extractValuesFromSuccessResponse(xmlObject) {
   // return {
   //   versao: xmlObject.versao
   // };
+
   return xmlObject;
 }
 
