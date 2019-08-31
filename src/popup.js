@@ -4,16 +4,21 @@ const PROXY_URL = 'https://proxier.now.sh';
 
 function load() {
   const btnSearch = document.getElementById('search');
+  const inputCode = document.getElementById('code');
+
+  inputCode.value = 'JT124744261BR';
 
   btnSearch.addEventListener('click', function() {
-    const codigoDePostagem = document.getElementById('code').value;
+    const codigoDePostagem = inputCode.value;
 
     var promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then((response) => {
-      const keys = Object.keys(response);
+      const rastro = response['rastro'];
 
-      // keys.forEach((k, i) => alert(i + ' - ' + k + ' => ' + response[k]))
+      const keys = Object.keys(rastro);
+
+      // keys.forEach((k, i) => alert(i + ' - ' + k + ' => ' + rastro[k]));
     });
   });
 }
@@ -39,7 +44,8 @@ function analyzeAndParseResponse(response) {
     return response
       .text()
       .then(parseSuccessXML)
-      .then(extractValuesFromSuccessResponse);
+      .then(extractValuesFromSuccessResponse)
+      .then(xmlToJson);
   }
 
   return response
@@ -49,19 +55,21 @@ function analyzeAndParseResponse(response) {
 }
 
 function parseSuccessXML(xmlString) {
-  var parser = new DOMParser();
-  parser.parseFromString(xmlString, 'text/xml');
-
   try {
     const returnStatement =
-      xmlString.replace(/\r?\n|\r/g, '').match(/<return>(.*)<\/return>/)[0] ||
-      '';
+      xmlString
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/\r?\n|\r/g, '')
+        .match(/<return>(.*)<\/return>/)[0] || '';
 
     const cleanReturnStatement = returnStatement
       .replace('<return>', '')
       .replace('</return>', '');
 
-    alert(returnStatement);
+    return cleanReturnStatement;
+    /*
+    const json = this.xmlToJson(xml);
 
     const parsedReturnStatement = cleanReturnStatement
       .split(/</)
@@ -74,18 +82,17 @@ function parseSuccessXML(xmlString) {
       }, {});
 
     return parsedReturnStatement;
+    */
   } catch (e) {
     throw new Error('Não foi possível interpretar o XML de resposta.');
   }
 }
 
 function extractValuesFromSuccessResponse(xmlObject) {
-  // Especificar os campos de retorno.
-  // return {
-  //   versao: xmlObject.versao
-  // };
+  var parser = new DOMParser();
+  const xml = parser.parseFromString(xmlObject, 'text/xml');
 
-  return xmlObject;
+  return xml;
 }
 
 function parseAndextractErrorMessage(xmlString) {
@@ -149,6 +156,7 @@ function xmlToJson(xml) {
       }
     }
   }
+
   return obj;
 }
 
