@@ -5,16 +5,16 @@ const PROXY_URL = 'https://proxier.now.sh';
 function load() {
   const btnSearch = document.getElementById('search');
 
-  btnSearch.addEventListener('click', function () {
-    const codigoDePostagem = document.getElementById("code").value
+  btnSearch.addEventListener('click', function() {
+    const codigoDePostagem = document.getElementById('code').value;
 
     var promise = fetchCorreiosService(codigoDePostagem);
 
-    promise.then(response => {
+    promise.then((response) => {
       const keys = Object.keys(response);
 
       // keys.forEach((k, i) => alert(i + ' - ' + k + ' => ' + response[k]))
-    })
+    });
   });
 }
 
@@ -49,15 +49,19 @@ function analyzeAndParseResponse(response) {
 }
 
 function parseSuccessXML(xmlString) {
+  var parser = new DOMParser();
+  parser.parseFromString(xmlString, 'text/xml');
+
   try {
     const returnStatement =
       xmlString.replace(/\r?\n|\r/g, '').match(/<return>(.*)<\/return>/)[0] ||
       '';
-    alert(returnStatement)
 
     const cleanReturnStatement = returnStatement
       .replace('<return>', '')
       .replace('</return>', '');
+
+    alert(returnStatement);
 
     const parsedReturnStatement = cleanReturnStatement
       .split(/</)
@@ -112,6 +116,40 @@ function throwApplicationError(error) {
   }
 
   throw serviceError;
+}
+
+function xmlToJson(xml) {
+  var obj = {};
+
+  if (xml.nodeType == 1) {
+    if (xml.attributes.length > 0) {
+      obj['@attributes'] = {};
+      for (var j = 0; j < xml.attributes.length; j++) {
+        var attribute = xml.attributes.item(j);
+        obj['@attributes'][attribute.nodeName] = attribute.nodeValue;
+      }
+    }
+  } else if (xml.nodeType == 3) {
+    obj = xml.nodeValue;
+  }
+
+  if (xml.hasChildNodes()) {
+    for (var i = 0; i < xml.childNodes.length; i++) {
+      var item = xml.childNodes.item(i);
+      var nodeName = item.nodeName;
+      if (typeof obj[nodeName] == 'undefined') {
+        obj[nodeName] = xmlToJson(item);
+      } else {
+        if (typeof obj[nodeName].push == 'undefined') {
+          var old = obj[nodeName];
+          obj[nodeName] = [];
+          obj[nodeName].push(old);
+        }
+        obj[nodeName].push(xmlToJson(item));
+      }
+    }
+  }
+  return obj;
 }
 
 document.addEventListener('DOMContentLoaded', load);
