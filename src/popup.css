@@ -1,36 +1,46 @@
-.divTable {
-  display: table;
-  width: 100%;
-}
-
-.divTableRow {
-  display: table-row;
-}
-
-.divTableHeading {
-  background-color: #EEE;
-  display: table-header-group;
-}
-
-.divTableCell,
-.divTableHead {
-  border: 1px solid #999999;
-  display: table-cell;
-  padding: 3px 10px;
-}
-
-.divTableHeading {
-  background-color: #EEE;
-  display: table-header-group;
-  font-weight: bold;
-}
-
-.divTableFoot {
-  background-color: #EEE;
-  display: table-footer-group;
-  font-weight: bold;
-}
-
-.divTableBody {
-  display: table-row-group;
+body {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav ads"
+    "nav article"
+    "nav footer";
+  grid-template-rows: 80px 70px 1fr 70px;
+  grid-template-columns: 20% 1fr;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  height: 100vh;
+  margin: 0;
+  }
+header, footer, article, nav, div {
+  padding: 1.2em;
+  background: gold;
+  }
+#pageHeader {
+  grid-area: header;
+  }
+#pageFooter {
+  grid-area: footer;
+  }
+#mainArticle {
+  grid-area: article;
+  }
+#mainNav {
+  grid-area: nav;
+  }
+#siteAds {
+  grid-area: ads;
+  }
+/* Stack the layout on small devices/viewports. */
+@media all and (max-width: 575px) {
+  body {
+    grid-template-areas:
+      "header"
+      "article"
+      "ads"
+      "nav"
+      "footer";
+    grid-template-rows: 80px 1fr 70px 1fr 70px;
+    grid-template-columns: 1fr;
+ }
 }
