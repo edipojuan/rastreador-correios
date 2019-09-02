@@ -11,7 +11,7 @@ function load() {
   btnSearch.addEventListener('click', function() {
     const codigoDePostagem = inputCode.value;
 
-    var promise = fetchCorreiosService(codigoDePostagem);
+    const promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then((response) => {
       const rastro = response['rastro'];
@@ -89,7 +89,7 @@ function parseSuccessXML(xmlString) {
 }
 
 function extractValuesFromSuccessResponse(xmlObject) {
-  var parser = new DOMParser();
+  const parser = new DOMParser();
   const xml = parser.parseFromString(xmlObject, 'text/xml');
 
   return xml;
@@ -126,13 +126,13 @@ function throwApplicationError(error) {
 }
 
 function xmlToJson(xml) {
-  var obj = {};
+  let obj = {};
 
   if (xml.nodeType == 1) {
     if (xml.attributes.length > 0) {
       obj['@attributes'] = {};
-      for (var j = 0; j < xml.attributes.length; j++) {
-        var attribute = xml.attributes.item(j);
+      for (let j = 0; j < xml.attributes.length; j++) {
+        let attribute = xml.attributes.item(j);
         obj['@attributes'][attribute.nodeName] = attribute.nodeValue;
       }
     }
@@ -141,14 +141,14 @@ function xmlToJson(xml) {
   }
 
   if (xml.hasChildNodes()) {
-    for (var i = 0; i < xml.childNodes.length; i++) {
-      var item = xml.childNodes.item(i);
-      var nodeName = item.nodeName;
+    for (let i = 0; i < xml.childNodes.length; i++) {
+      let item = xml.childNodes.item(i);
+      let nodeName = item.nodeName;
       if (typeof obj[nodeName] == 'undefined') {
         obj[nodeName] = xmlToJson(item);
       } else {
         if (typeof obj[nodeName].push == 'undefined') {
-          var old = obj[nodeName];
+          let old = obj[nodeName];
           obj[nodeName] = [];
           obj[nodeName].push(old);
         }
