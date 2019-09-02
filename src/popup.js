@@ -144,7 +144,9 @@ function xmlToJson(xml) {
     for (let i = 0; i < xml.childNodes.length; i++) {
       let item = xml.childNodes.item(i);
       let nodeName = item.nodeName;
-      if (typeof obj[nodeName] == 'undefined') {
+      if (nodeName === '#text') {
+        obj = item.nodeValue;
+      } else if (typeof obj[nodeName] == 'undefined') {
         obj[nodeName] = xmlToJson(item);
       } else {
         if (typeof obj[nodeName].push == 'undefined') {
