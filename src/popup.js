@@ -10,7 +10,7 @@ function load() {
 
   inputCode.value = 'JT124744261BR';
 
-  btnSearch.addEventListener('click', function() {
+  btnSearch.addEventListener('click', function () {
     const codigoDePostagem = inputCode.value;
 
     if (!codigoDePostagem) {
@@ -26,29 +26,31 @@ function load() {
     const promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then((response) => {
-      const { rastro } = response;
+      const {
+        rastro
+      } = response;
 
-      const { objeto } = rastro;
+      const {
+        objeto
+      } = rastro;
 
-      const { evento } = objeto;
-
-      let results = '';
-
-      evento.forEach((item) => {
-        results += `<div class="result-item">${item.data}<br>${item.hora}</div>
-        <div class="result-item">${item.descricao}<br>${item.local}, ${item.cidade}/${item.uf}</div>`;
-      });
+      const {
+        evento
+      } = objeto;
 
       // for (let index = 0; index < 10; index++) { // Test
       //   results += `<div class="result-item">test</div>
       //   <div class="result-item">test<br>test</div>`;
       // }
 
-      divResult.innerHTML = results;
+      divResult.innerHTML = evento.map(item =>
+        `<div class="result-item">${item.data}<br>${item.hora}</div>
+        <div class="result-item">${item.descricao}<br>${item.local}, ${item.cidade}/${item.uf}</div>`
+      ).join('');
     });
   });
 
-  btnClear.addEventListener('click', function() {
+  btnClear.addEventListener('click', function () {
     divResult.innerHTML = '';
   });
 }
@@ -88,10 +90,10 @@ function parseSuccessXML(xmlString) {
   try {
     const returnStatement =
       xmlString
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/\r?\n|\r/g, '')
-        .match(/<return>(.*)<\/return>/)[0] || '';
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/\r?\n|\r/g, '')
+      .match(/<return>(.*)<\/return>/)[0] || '';
 
     const cleanReturnStatement = returnStatement
       .replace('<return>', '')
