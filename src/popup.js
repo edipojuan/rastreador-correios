@@ -4,7 +4,9 @@ const PROXY_URL = 'https://proxier.now.sh';
 
 function load() {
   const btnSearch = document.getElementById('search');
+  const btnClear = document.getElementById('clear');
   const inputCode = document.getElementById('code');
+  const divResult = document.getElementById('result-container');
 
   inputCode.value = 'JT124744261BR';
 
@@ -14,12 +16,30 @@ function load() {
     const promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then((response) => {
-      const rastro = response['rastro'];
+      const { rastro } = response;
 
-      const keys = Object.keys(rastro);
+      const { objeto } = rastro;
 
-      // keys.forEach((k, i) => alert(i + ' - ' + k + ' => ' + rastro[k]));
+      const { evento } = objeto;
+
+      let results = '';
+
+      evento.forEach((item) => {
+        results += `<div class="result-item">${item.data}<br>${item.hora}</div>
+        <div class="result-item">${item.descricao}<br>${item.local}, ${item.cidade}/${item.uf}</div>`;
+      });
+
+      // for (let index = 0; index < 10; index++) { // Test
+      //   results += `<div class="result-item">test</div>
+      //   <div class="result-item">test<br>test</div>`;
+      // }
+
+      divResult.innerHTML = results;
     });
+  });
+
+  btnClear.addEventListener('click', function() {
+    divResult.innerHTML = '';
   });
 }
 
@@ -68,21 +88,6 @@ function parseSuccessXML(xmlString) {
       .replace('</return>', '');
 
     return cleanReturnStatement;
-    /*
-    const json = this.xmlToJson(xml);
-
-    const parsedReturnStatement = cleanReturnStatement
-      .split(/</)
-      .reduce((result, exp) => {
-        const splittenExp = exp.split('>');
-        if (splittenExp.length > 1 && splittenExp[1].length) {
-          result[splittenExp[0]] = splittenExp[1];
-        }
-        return result;
-      }, {});
-
-    return parsedReturnStatement;
-    */
   } catch (e) {
     throw new Error('Não foi possível interpretar o XML de resposta.');
   }
