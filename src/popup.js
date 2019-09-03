@@ -13,6 +13,16 @@ function load() {
   btnSearch.addEventListener('click', function() {
     const codigoDePostagem = inputCode.value;
 
+    if (!codigoDePostagem) {
+      alert('Informe o código de postagem.');
+      return;
+    }
+
+    if (codigoDePostagem.length < 13) {
+      alert('Código de postagem inválido.');
+      return;
+    }
+
     const promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then((response) => {
