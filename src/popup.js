@@ -6,11 +6,11 @@ function load() {
   const btnSearch = document.getElementById('search');
   const btnClear = document.getElementById('clear');
   const inputCode = document.getElementById('code');
-  const divResult = document.getElementById('result-container');
+  const divTimeline = document.getElementById('timeline');
 
   inputCode.value = 'JT124744261BR';
 
-  btnSearch.addEventListener('click', function () {
+  btnSearch.addEventListener('click', function() {
     const codigoDePostagem = inputCode.value;
 
     if (!codigoDePostagem) {
@@ -26,32 +26,34 @@ function load() {
     const promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then((response) => {
-      const {
-        rastro
-      } = response;
+      const { rastro } = response;
 
-      const {
-        objeto
-      } = rastro;
+      const { objeto } = rastro;
 
-      const {
-        evento
-      } = objeto;
+      const { evento } = objeto;
 
-      // for (let index = 0; index < 10; index++) { // Test
-      //   results += `<div class="result-item">test</div>
-      //   <div class="result-item">test<br>test</div>`;
-      // }
-
-      divResult.innerHTML = evento.map(item =>
-        `<div class="result-item">${item.data}<br>${item.hora}</div>
-        <div class="result-item">${item.descricao}<br>${item.local}, ${item.cidade}/${item.uf}</div>`
-      ).join('');
+      divTimeline.innerHTML = evento
+        .map(
+          (item) =>
+            `<article>
+              <div class="inner">
+                <span class="date">
+                  <span class="day">30<sup></sup></span>
+                  <span class="month">Jan</span>
+                  <span class="year">2014</span>
+                </span>
+                <h2>${item.descricao}</h2>
+                <p>${item.local}, ${item.cidade}/${item.uf}</p>
+              </div>
+            </article>`
+        )
+        .join('');
     });
   });
 
-  btnClear.addEventListener('click', function () {
-    divResult.innerHTML = '';
+  btnClear.addEventListener('click', function() {
+    inputCode.value = '';
+    divTimeline.innerHTML = '';
   });
 }
 
@@ -90,10 +92,10 @@ function parseSuccessXML(xmlString) {
   try {
     const returnStatement =
       xmlString
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/\r?\n|\r/g, '')
-      .match(/<return>(.*)<\/return>/)[0] || '';
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/\r?\n|\r/g, '')
+        .match(/<return>(.*)<\/return>/)[0] || '';
 
     const cleanReturnStatement = returnStatement
       .replace('<return>', '')

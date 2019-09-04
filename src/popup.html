@@ -4,21 +4,27 @@
 <head>
   <title>Rastreamento de objetos - Correios</title>
   <meta charset="utf-8"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
   <link href="popup.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-  <header id="pageHeader">Rastreamento de objetos - Correios</header>
+  <header id="pageHeader">Rastreamento de Objetos</header>
 
   <div id="siteAds">
     <input type="text" id="code"></input>
-    <button id="search">Pesquisar</button>
-    <button id="clear">Limpar</button>
+    <button id="search"><i class="fas fa-search-location"></i>Pesquisar</button>
+    <button id="clear"><i class="fas fa-search-minus"></i>Limpar</button>
+
+    <span class="historic">
+      <i class="fas fa-map-marked-alt"></i>
+    </span>
+
   </div>
+
   <article id="mainArticle">
-    <div id="result-container"></div>
+      <section id="timeline"></section>
   </article>
-  <nav id="mainNav">RAS</nav>
 
   <footer id="pageFooter">
     ©2019 Rastreamento de objetos - Correios | Todos os direitos reservados
