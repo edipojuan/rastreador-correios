@@ -16,33 +16,39 @@ body {
   font-size: 14px;
   border: 2px solid #fff;
 }
+
 article {
   background: #25303b;
 }
+
 header,
 footer,
 nav {
   padding: 1.2em;
   background: #25303b;
 }
+
 #pageHeader {
   grid-area: header;
   text-align: center;
   font-size: 18px;
   padding: 10px;
 }
+
 #pageFooter {
   grid-area: footer;
 }
+
 #mainArticle {
   grid-area: article;
 }
+
 #mainNav {
   grid-area: nav;
 }
+
 #siteAds {
   grid-area: ads;
-  text-align: center;
 }
 
 #siteAds input {
@@ -51,7 +57,7 @@ nav {
   text-align: center;
   font-size: 18px;
   border: none;
-  margin: 10px;
+  margin-top: 10px;
   border-radius: 30px;
   background-color: #eee;
 }
@@ -93,6 +99,7 @@ section#timeline {
   margin: 0 auto;
   position: relative;
 }
+
 section#timeline:before {
   content: '';
   display: block;
@@ -104,22 +111,26 @@ section#timeline:before {
   height: 100%;
   background: rgba(255, 255, 255, 0.2);
 }
+
 section#timeline article {
   width: 100%;
   margin: 0 0 20px 0;
   position: relative;
 }
+
 section#timeline article:after {
   content: '';
   display: block;
   clear: both;
 }
+
 section#timeline article div.inner {
   width: 90%;
   float: left;
   margin: 5px 0 0 0;
   border-radius: 6px;
 }
+
 section#timeline article div.inner span.date {
   display: block;
   width: 60px;
@@ -138,29 +149,34 @@ section#timeline article div.inner span.date {
   border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 0 7px #25303b;
 }
+
 section#timeline article div.inner span.date span {
   display: block;
   text-align: center;
 }
+
 section#timeline article div.inner span.date span.day {
   font-size: 14px;
 }
+
 section#timeline article div.inner span.date span.month {
   font-size: 16px;
 }
+
 section#timeline article div.inner span.date span.year {
   font-size: 10px;
 }
+
 section#timeline article div.inner h2 {
-  padding: 15px;
+  padding: 10px;
   margin: 0;
   color: #fff;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: -1px;
+  font-size: 18px;
+  letter-spacing: 1px;
   border-radius: 6px 6px 0 0;
   position: relative;
 }
+
 section#timeline article div.inner h2:after {
   content: '';
   position: absolute;
@@ -170,6 +186,7 @@ section#timeline article div.inner h2:after {
   height: 10px;
   -webkit-transform: rotate(-45deg);
 }
+
 section#timeline article div.inner p {
   padding: 15px;
   margin: 0;
@@ -178,40 +195,50 @@ section#timeline article div.inner p {
   color: #656565;
   border-radius: 0 0 6px 6px;
 }
+
 section#timeline article:nth-child(1) div.inner h2 {
   background: #e74c3c;
 }
+
 section#timeline article:nth-child(1) div.inner h2:after {
   background: #e74c3c;
 }
+
 section#timeline article:nth-child(2) div.inner h2 {
   background: #2ecc71;
 }
+
 section#timeline article:nth-child(2) div.inner h2:after {
   background: #2ecc71;
 }
+
 section#timeline article:nth-child(3) div.inner h2 {
   background: #e67e22;
 }
+
 section#timeline article:nth-child(3) div.inner h2:after {
   background: #e67e22;
 }
+
 section#timeline article:nth-child(4) div.inner h2 {
   background: #1abc9c;
 }
+
 section#timeline article:nth-child(4) div.inner h2:after {
   background: #1abc9c;
 }
+
 section#timeline article:nth-child(5) div.inner h2 {
   background: #9b59b6;
 }
+
 section#timeline article:nth-child(5) div.inner h2:after {
   background: #9b59b6;
 }
 
 .historic {
-  font-size: 36px;
-  padding: 9px;
+  font-size: 34px;
+  padding: 12px;
   float: right;
   color: Mediumslateblue;
   cursor: pointer;
