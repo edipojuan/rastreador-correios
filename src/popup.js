@@ -35,17 +35,20 @@ function load() {
       divTimeline.innerHTML = evento
         .map(
           (item) =>
-            `<article>
+            {
+            const dateArray = item.data.split('/');
+            return `<article>
               <div class="inner">
                 <span class="date">
-                  <span class="day">30<sup></sup></span>
-                  <span class="month">Jan</span>
-                  <span class="year">2014</span>
+                  <span class="day">${dateArray[0]}<sup></sup></span>
+                  <span class="month">${getMonthName(+dateArray[1])}</span>
+                  <span class="year">${dateArray[2]}</span>
                 </span>
                 <h2>${item.descricao}</h2>
                 <p>${item.local}, ${item.cidade}/${item.uf}</p>
               </div>
             </article>`
+          }
         )
         .join('');
     });
@@ -179,6 +182,35 @@ function xmlToJson(xml) {
   }
 
   return obj;
+}
+
+function getMonthName(month) {
+   switch (month) {
+    case 1:
+      return 'JAN';
+    case 2:
+      return 'FEV';
+    case 3:
+      return 'MAR';
+    case 4:
+      return 'ABR';
+    case 5:
+      return 'MAI';
+    case 6:
+      return 'JUN';
+    case 7:
+      return 'JUL';
+    case 8:
+      return 'AGO';
+    case 9:
+      return 'SET';
+    case 10:
+      return 'OUT';
+    case 11:
+      return 'NOV';
+    case 12:
+      return 'DEZ';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', load);
