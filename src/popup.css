@@ -60,6 +60,7 @@ nav {
   margin-top: 10px;
   border-radius: 30px;
   background-color: #eee;
+  outline: none;
 }
 
 #siteAds button {
@@ -72,6 +73,11 @@ nav {
   cursor: pointer;
   border-radius: 30px;
   background-color: #eee;
+  outline: none;
+  transition: transform 200ms ease-in-out;
+}
+#siteAds button:active {
+  transform: scale(0.9);
 }
 
 #siteAds button i.fas {
