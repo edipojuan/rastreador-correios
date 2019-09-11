@@ -1,17 +1,7 @@
-const path = require('path');
+const environment = (process.env.NODE_ENV || 'development').trim();
 
-module.exports = {
-  entry: './src/popup.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  mode: 'development',
-  module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: "babel-loader"
-    }]
-  }
-};
+if (environment === 'development') {
+  module.exports = require('./config/webpack.dev.config.js');
+} else {
+  module.exports = require('./config/webpack.prod.config.js');
+}

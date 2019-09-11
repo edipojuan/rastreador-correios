@@ -1,3 +1,5 @@
+import './styles/scss/main.scss';
+
 'use strict';
 
 const PROXY_URL = 'https://proxier.now.sh';
@@ -10,7 +12,7 @@ function load() {
 
   inputCode.value = 'JT124744261BR';
 
-  btnSearch.addEventListener('click', function() {
+  btnSearch.addEventListener('click', function () {
     const codigoDePostagem = inputCode.value;
 
     if (!codigoDePostagem) {
@@ -26,16 +28,21 @@ function load() {
     const promise = fetchCorreiosService(codigoDePostagem);
 
     promise.then((response) => {
-      const { rastro } = response;
+      const {
+        rastro
+      } = response;
 
-      const { objeto } = rastro;
+      const {
+        objeto
+      } = rastro;
 
-      const { evento } = objeto;
+      const {
+        evento
+      } = objeto;
 
       divTimeline.innerHTML = evento
         .map(
-          (item) =>
-            {
+          (item) => {
             const dateArray = item.data.split('/');
             return `<article>
               <div class="inner">
@@ -54,7 +61,7 @@ function load() {
     });
   });
 
-  btnClear.addEventListener('click', function() {
+  btnClear.addEventListener('click', function () {
     inputCode.value = '';
     divTimeline.innerHTML = '';
   });
@@ -95,10 +102,10 @@ function parseSuccessXML(xmlString) {
   try {
     const returnStatement =
       xmlString
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/\r?\n|\r/g, '')
-        .match(/<return>(.*)<\/return>/)[0] || '';
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/\r?\n|\r/g, '')
+      .match(/<return>(.*)<\/return>/)[0] || '';
 
     const cleanReturnStatement = returnStatement
       .replace('<return>', '')
@@ -185,7 +192,7 @@ function xmlToJson(xml) {
 }
 
 function getMonthName(month) {
-   switch (month) {
+  switch (month) {
     case 1:
       return 'JAN';
     case 2:
