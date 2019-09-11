@@ -1,0 +1,22 @@
+{
+  "name": "rastreador-correios",
+  "version": "1.0.0",
+  "description": "Rastreador de pacotes utilizando o webService dos correios",
+  "repository": "https://github.com/edipojuan/rastreador-correios.git",
+  "author": "edipojuan <edipojs@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --watch"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "babel-loader": "^8.0.6"
+  }
+}
