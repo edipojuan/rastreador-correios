@@ -1,4 +1,4 @@
-import './styles/scss/main.scss';
+import './scss/main.scss';
 
 'use strict';
 
