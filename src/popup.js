@@ -1,5 +1,9 @@
 import './scss/main.scss';
 
+import logo16 from './images/logo16.png';
+import logo32 from './images/logo32.png';
+import logo48 from './images/logo48.png';
+
 'use strict';
 
 const PROXY_URL = 'https://proxier.now.sh';
