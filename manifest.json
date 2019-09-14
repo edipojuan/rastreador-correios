@@ -1,24 +1,22 @@
 {
   "name": "Rastreamento de objetos - Correios",
   "short_name": "ROC",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Édipo Juan",
   "description": "Consulte a situação de seus objetos nos Correios.",
   "manifest_version": 2,
   "browser_action": {
-    "default_popup": "src/popup.html",
+    "default_popup": "dist/index.html",
     "default_icon": {
-      "16": "src/images/logo16.png",
-      "32": "src/images/logo32.png",
-      "48": "src/images/logo48.png",
-      "128": "src/images/logo128.png"
+      "16": "dist/images/logo16.png",
+      "32": "dist/images/logo32.png",
+      "48": "dist/images/logo48.png"
     }
   },
   "icons": {
-    "16": "src/images/logo16.png",
-    "32": "src/images/logo32.png",
-    "48": "src/images/logo48.png",
-    "128": "src/images/logo128.png"
+    "16": "dist/images/logo16.png",
+    "32": "dist/images/logo32.png",
+    "48": "dist/images/logo48.png"
   },
   "commands": {
     "_execute_browser_action": {
