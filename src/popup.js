@@ -14,7 +14,10 @@ function load() {
   const inputCode = document.getElementById('code');
   const divTimeline = document.getElementById('timeline');
 
-  inputCode.value = 'JT124744261BR';
+  chrome.storage.sync.get(['codes'], function (items) {
+    inputCode.value = items.codes;
+    btnSearch.click();
+  });
 
   btnSearch.addEventListener('click', function () {
     const codigoDePostagem = inputCode.value;
@@ -28,6 +31,12 @@ function load() {
       alert('Código de postagem inválido.');
       return;
     }
+
+    chrome.storage.sync.set({
+      'codes': codigoDePostagem
+    }, function () {
+      // alert('Code saved');
+    });
 
     const promise = fetchCorreiosService(codigoDePostagem);
 

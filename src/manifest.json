@@ -26,5 +26,8 @@
       },
       "description": "Abrir o Rastreador"
     }
-  }
+  },
+  "permissions": [
+    "storage"
+  ]
 }
