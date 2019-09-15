@@ -14,9 +14,15 @@ function load() {
   const inputCode = document.getElementById('code');
   const divTimeline = document.getElementById('timeline');
 
-  chrome.storage.sync.get(['codes'], function (items) {
-    inputCode.value = items.codes;
-    btnSearch.click();
+  chrome.storage.sync.get(['codes', 'test'], function (items) {
+    const {
+      codes
+    } = items;
+
+    if (codes) {
+      inputCode.value = items.codes;
+      btnSearch.click();
+    }
   });
 
   btnSearch.addEventListener('click', function () {
