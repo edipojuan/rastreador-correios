@@ -4,6 +4,7 @@ const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/popup.js',
@@ -55,7 +56,11 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.[chunkhash].css'
-    })
+    }),
+    new CopyPlugin([{
+      from: './src/manifest.json',
+      to: ''
+    }])
   ],
   resolve: {
     extensions: ['.js', '.ts']
