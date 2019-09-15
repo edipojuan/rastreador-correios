@@ -1,0 +1,86 @@
+.dropdown,
+.combobox {
+  position: relative;
+  display: inline-block;
+}
+
+.combobox>.downarrow,
+.dropdown>.downarrow {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 1.25em;
+
+  cursor: default;
+  nav-index: -1;
+
+  border-width: 0px;
+  border-style: inherit;
+  border-color: inherit;
+}
+
+.combobox:not(.dropdown)>.downarrow {
+  border-left-width: 1px;
+}
+
+.downarrow:empty::before {
+  content: '▾';
+}
+
+.downarrow::before,
+.downarrow>*:only-child {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  display: block;
+  transform: translateY(-50%);
+}
+
+.dropdown>*:last-child,
+.combobox>*:last-child {
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 0.4s;
+  position: absolute;
+  left: 0;
+  top: 110%;
+  border: 1px solid #888;
+  background-color: Mediumslateblue;
+  box-shadow: 1px 2px 4px 1px #666;
+  box-shadow: 1px 2px 4px 1px #4448;
+  z-index: 9999;
+  width: 467px;
+  box-sizing: border-box;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.dropdown:focus>*:last-child,
+.dropdown>*:focus~*:last-child,
+.combobox>.downarrow:focus~*:last-child,
+.combobox>.sticky:last-child:hover,
+.dropdown>.sticky:last-child:hover,
+.combobox>.less-sticky:last-child:hover,
+.dropdown>.less-sticky:last-child:hover,
+.combobox>*:last-child:focus:not(.less-sticky),
+.dropdown>*:last-child:focus:not(.less-sticky) {
+  display: block;
+  opacity: 1;
+  transition: 0.15s;
+  pointer-events: auto;
+}
+
+.historic {
+  position: absolute;
+  top: 2px;
+  right: -6px;
+  z-index: 9999;
+  font-size: large;
+  color: mediumslateblue;
+  background-color: #fff;
+  border-radius: 50px;
+  padding: 4px;
+}

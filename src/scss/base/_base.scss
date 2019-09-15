@@ -49,6 +49,7 @@ nav {
 
 #siteAds {
   grid-area: ads;
+  text-align: center;
 }
 
 #siteAds input {
@@ -243,13 +244,6 @@ section#timeline article:nth-child(5) div.inner h2:after {
   background: #9b59b6;
 }
 
-.historic {
-  font-size: 34px;
-  padding: 12px;
-  float: right;
-  color: Mediumslateblue;
-  cursor: pointer;
-}
 
 
 
