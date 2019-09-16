@@ -29,12 +29,12 @@ function load() {
     const codigoDePostagem = inputCode.value;
 
     if (!codigoDePostagem) {
-      alert('Informe o código de postagem.');
+      notification('Informe o código de postagem.');
       return;
     }
 
     if (codigoDePostagem.length < 13) {
-      alert('Código de postagem inválido.');
+      notification('Código de postagem inválido.');
       return;
     }
 
@@ -83,7 +83,23 @@ function load() {
   btnClear.addEventListener('click', function () {
     inputCode.value = '';
     divTimeline.innerHTML = '';
+    notification('Rastreamento limpo com sucesso!');
   });
+}
+
+function notification(message) {
+  const divNotification = document.getElementById('notifyType');
+
+  divNotification.innerHTML = message;
+
+  var element = document.querySelector(".notify");
+  element.classList.add("active");
+  var element1 = document.querySelector("#notifyType")
+  element1.classList.add("success");
+
+  setTimeout(() => {
+    element.classList.remove("active");
+  }, 2300);
 }
 
 function fetchCorreiosService(codigoDePostagem) {
@@ -111,10 +127,14 @@ function analyzeAndParseResponse(response) {
       .then(xmlToJson);
   }
 
-  return response
-    .text()
-    .then(parseAndextractErrorMessage)
-    .then(throwCorreiosError);
+  if (response.status === 500) {
+    notification('Nenhum objeto encontrado.');
+  }
+
+  // return response
+  //   .text()
+  //   .then(parseAndextractErrorMessage)
+  //   .then(throwCorreiosError);
 }
 
 function parseSuccessXML(xmlString) {
