@@ -44,22 +44,49 @@ function load() {
       // alert('Code saved');
     });
 
-    const promise = fetchCorreiosService(codigoDePostagem);
+    // const promise = fetchCorreiosService(codigoDePostagem);
+
+    // promise.then((response) => {
+    //   const {
+    //     rastro
+    //   } = response;
+
+    //   const {
+    //     objeto
+    //   } = rastro;
+
+    //   const {
+    //     evento
+    //   } = objeto;
+
+    //   divTimeline.innerHTML = evento
+    //     .map(
+    //       (item) => {
+    //         const dateArray = item.data.split('/');
+    //         return `<article>
+    //           <div class="inner">
+    //             <span class="date">
+    //               <span class="day">${dateArray[0]}<sup></sup></span>
+    //               <span class="month">${getMonthName(+dateArray[1])}</span>
+    //               <span class="year">${dateArray[2]}</span>
+    //             </span>
+    //             <h2>${item.descricao}</h2>
+    //             <p>${item.local}, ${item.cidade}/${item.uf}</p>
+    //           </div>
+    //         </article>`
+    //       }
+    //     )
+    //     .join('');
+    // });
+
+    const promise = fetchLinketrackService(codigoDePostagem);
 
     promise.then((response) => {
       const {
-        rastro
+        eventos
       } = response;
 
-      const {
-        objeto
-      } = rastro;
-
-      const {
-        evento
-      } = objeto;
-
-      divTimeline.innerHTML = evento
+      divTimeline.innerHTML = eventos
         .map(
           (item) => {
             const dateArray = item.data.split('/');
@@ -70,8 +97,8 @@ function load() {
                   <span class="month">${getMonthName(+dateArray[1])}</span>
                   <span class="year">${dateArray[2]}</span>
                 </span>
-                <h2>${item.descricao}</h2>
-                <p>${item.local}, ${item.cidade}/${item.uf}</p>
+                <h2>${item.status}</h2>
+                <p>${item.local}, ${item.subStatus[0]}</p>
               </div>
             </article>`
           }
@@ -102,6 +129,19 @@ function notification(message) {
   }, 2300);
 }
 
+function fetchLinketrackService(codigoDePostagem) {
+  const url = `https://linketrack.com/track/json?user=edipojs&token=gCZ2EaiOIO0L0ozoQI0X7pO0o&codigo=${codigoDePostagem}`;
+  const options = {};
+  //   method: 'GET',
+  //   headers: {
+  //     'Content-Type': 'application/json; charset=utf-8'
+  //   }
+  // };
+
+  return fetch(url, options)
+    .then(analyzeAndParseResponse);
+}
+
 function fetchCorreiosService(codigoDePostagem) {
   const url = `${PROXY_URL}/https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente`;
   const options = {
@@ -121,21 +161,33 @@ function fetchCorreiosService(codigoDePostagem) {
 function analyzeAndParseResponse(response) {
   if (response.ok) {
     return response
-      .text()
-      .then(parseSuccessXML)
-      .then(extractValuesFromSuccessResponse)
-      .then(xmlToJson);
+      .json()
+      .then(resp => resp);
   }
 
   if (response.status === 500) {
     notification('Nenhum objeto encontrado.');
   }
-
-  // return response
-  //   .text()
-  //   .then(parseAndextractErrorMessage)
-  //   .then(throwCorreiosError);
 }
+
+// function analyzeAndParseResponse(response) {
+//   if (response.ok) {
+//     return response
+//       .text()
+//       .then(parseSuccessXML)
+//       .then(extractValuesFromSuccessResponse)
+//       .then(xmlToJson);
+//   }
+
+//   if (response.status === 500) {
+//     notification('Nenhum objeto encontrado.');
+//   }
+
+//   // return response
+//   //   .text()
+//   //   .then(parseAndextractErrorMessage)
+//   //   .then(throwCorreiosError);
+// }
 
 function parseSuccessXML(xmlString) {
   try {
