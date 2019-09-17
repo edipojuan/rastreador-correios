@@ -1,7 +1,7 @@
 {
   "name": "Rastreamento de objetos - Correios",
   "short_name": "ROC",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Édipo Juan",
   "description": "Consulte a situação de seus objetos. Obtemos essas informações diretamente da base dos Correios.",
   "manifest_version": 2,
