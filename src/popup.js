@@ -14,16 +14,18 @@ function load() {
   const inputCode = document.getElementById('code');
   const divTimeline = document.getElementById('timeline');
 
-  chrome.storage.sync.get(['codes', 'test'], function (items) {
-    const {
-      codes
-    } = items;
+  if (chrome.storage) {
+    chrome.storage.sync.get(['codes', 'test'], function (items) {
+      const {
+        codes
+      } = items;
 
-    if (codes) {
-      inputCode.value = items.codes;
-      btnSearch.click();
-    }
-  });
+      if (codes) {
+        inputCode.value = items.codes;
+        btnSearch.click();
+      }
+    });
+  }
 
   btnSearch.addEventListener('click', function () {
     const codigoDePostagem = inputCode.value;
@@ -38,11 +40,12 @@ function load() {
       return;
     }
 
-    chrome.storage.sync.set({
-      'codes': codigoDePostagem
-    }, function () {
-      // alert('Code saved');
-    });
+    if (chrome.storage) {
+      chrome.storage.sync.set({
+        'codes': codigoDePostagem
+      });
+    }
+
 
     // const promise = fetchCorreiosService(codigoDePostagem);
 
