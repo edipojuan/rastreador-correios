@@ -1,6 +1,6 @@
 # Rastreador | Extension - Google Chrome
 
-> Consulte a situação de seus objetos nos Correios.
+> Consulte a situação de seus objetos.
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
