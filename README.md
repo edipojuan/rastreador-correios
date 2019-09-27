@@ -1,10 +1,14 @@
 # Rastreador | Extension - Google Chrome
 
-> Consulte a situação de seus objetos.
+> *Consulte a situação de seus objetos.*
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
+
+## Como instalar a extensão no chrome
+
+Vá até o chrome web store clicando [aqui](https://chrome.google.com/webstore/detail/rastreamento-de-objetos-c/gipmnbmfcohhohgcjknpiogoaofanflo?utm_source=chrome-ntp-icon), depois clique em `Usar no Chrome`
 
 ## Como contribuir
 
