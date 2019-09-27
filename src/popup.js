@@ -8,12 +8,12 @@ import logo48 from './images/logo48.png';
 
 const PROXY_URL = 'https://proxier.now.sh';
 
-function load() {
-  const btnSearch = document.getElementById('search');
-  const btnClear = document.getElementById('clear');
-  const inputCode = document.getElementById('code');
-  const divTimeline = document.getElementById('timeline');
+const btnSearch = document.getElementById('search');
+const btnClear = document.getElementById('clear');
+const inputCode = document.getElementById('code');
+const divTimeline = document.getElementById('timeline');
 
+function load() {
   if (chrome.storage) {
     chrome.storage.sync.get(['codes', 'test'], function (items) {
       const {
@@ -86,13 +86,17 @@ function load() {
 
     promise.then((response) => {
       const {
-        eventos
+        eventos,
+        servico
       } = response;
 
-      divTimeline.innerHTML = eventos
+      divTimeline.innerHTML = (eventos.length < 1) ? servico : eventos
         .map(
           (item) => {
             const dateArray = item.data.split('/');
+            const {
+              status
+            } = item;
             return `<article>
               <div class="inner">
                 <span class="date">
@@ -100,7 +104,7 @@ function load() {
                   <span class="month">${getMonthName(+dateArray[1])}</span>
                   <span class="year">${dateArray[2]}</span>
                 </span>
-                <h2>${item.status}</h2>
+                <h2 class="${getClass(status)}">${status}</h2>
                 <p>${item.local}, ${item.subStatus[0]}</p>
               </div>
             </article>`
@@ -133,6 +137,8 @@ function notification(message) {
 }
 
 function fetchLinketrackService(codigoDePostagem) {
+  divTimeline.innerHTML = 'Obtendo informações...';
+
   const url = `https://linketrack.com/track/json?user=edipojs&token=gCZ2EaiOIO0L0ozoQI0X7pO0o&codigo=${codigoDePostagem}`;
   const options = {};
   //   method: 'GET',
@@ -311,6 +317,31 @@ function getMonthName(month) {
       return 'NOV';
     case 12:
       return 'DEZ';
+  }
+}
+
+function getClass(status) {
+  switch (status.split(' - ')[0]) {
+    case 'Objeto postado':
+      return 'status-blue'
+
+    case 'A entrega não pode ser efetuada':
+      return 'status-red'
+
+    case 'Objeto saiu para entrega ao destinatário':
+      return 'status-light'
+
+    case 'Objeto entregue ao destinatário':
+      return 'status-green'
+
+    case 'Objeto aguardando retirada no endereço indicado':
+      return 'status-orange'
+
+    case 'Objeto encaminhado':
+      return 'status-info'
+
+    default:
+      return 'status-blue'
   }
 }
 
