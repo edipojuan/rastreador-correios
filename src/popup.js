@@ -6,7 +6,9 @@ import logo48 from './images/logo48.png';
 
 'use strict';
 
-const PROXY_URL = 'https://proxier.now.sh';
+import {
+  PROXY_URL
+} from './js/utils/consts';
 
 const btnSearch = document.getElementById('search');
 const btnClear = document.getElementById('clear');
